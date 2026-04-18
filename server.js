@@ -7,9 +7,6 @@ const app = express();
 const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
 
-let db;
-db = client.db("BancOAfW");
-
 function connectToDatabase() {
     const url = process.env.DB_URL;
     return MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -17,7 +14,7 @@ function connectToDatabase() {
 connectToDatabase()
     .then(client => {
         console.log("Conectado ao MongoDB");
-        const db = client.db("dbname");
+        const db = client.db("BancOAfW");
         // Você pode usar a variável `db` para interagir com o banco de dados
     })
     .catch(error => {
@@ -31,3 +28,4 @@ app.get("/", (req, res) => {
 app.listen(3000, () => {
  console.log("Servidor rodando");
 });
+
