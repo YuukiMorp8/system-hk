@@ -50,11 +50,10 @@ app.post("/criar-conta", (req, res) => {
 });
 
 app.get("/", (req, res) => {
- res.sendFile(__dirname + "/Servidor/Login.html");
+    res.redirect("/Login.html");
 });
 
 app.listen(3000, () => {
  console.log("Servidor rodando");
 });
-
 
