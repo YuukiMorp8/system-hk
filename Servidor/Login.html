@@ -176,31 +176,6 @@
             <p>Sistema de Login Seguro</p>
         </div>
     </div>
-    <script src="script.js"></script>
-    <script>
-        document.getElementById("btnLogin").addEventListener("click", function() {
-            const usuario = document.getElementById("nome").value;
-            const senha = document.getElementById("senha").value;
-            const errorMessage = document.getElementById("errorMessage");
-
-        db.collection("Dbgenerico").findOne({ usuario: usuario, senha: senha }, function(err, user) {
-            if (err) {
-                console.error("Erro ao consultar o banco de dados:", err);
-                errorMessage.textContent = "Ocorreu um erro. Tente novamente.";
-                errorMessage.classList.add("show");
-                return;
-            }
-
-            if (user) {
-                // Login bem-sucedido
-                window.location.href = "dashboard.html"; // Redireciona para a página do dashboard
-            } else {
-                // Login falhou
-                errorMessage.textContent = "Usuário ou senha incorretos.";
-                errorMessage.classList.add("show");
-            }
-        });
-        });
-    </script>
+    <script src="Sistema/Script.js"></script>
 </body>
 </html>
