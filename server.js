@@ -65,8 +65,8 @@ app.post("/criar-conta", (req, res) => {
     // Lógica para criar a conta no banco de dados
 });
 
-app.get("/", (req, res) => {
-    res.sendFile("/Dashboard.html");
+app.get("/Dashboard.html", (req, res) => {
+    res.sendFile(__dirname + "/Dashboard.html");
 });
 
 app.get("/", (req, res) => {
@@ -76,3 +76,5 @@ app.get("/", (req, res) => {
 app.listen(3000, () => {
  console.log("Servidor rodando");
 });
+
+
