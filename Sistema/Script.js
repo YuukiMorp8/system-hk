@@ -1,7 +1,7 @@
 
 let usuarioinput = document.getElementById("usuario");
 let senhainput = document.getElementById("senha");
-let loginbutton = document.getElementById("loginbutton");
+let loginbutton = document.getElementById("btnLogin");
 
 loginbutton.addEventListener("click", function() {
     let usuario = usuarioinput.value;
