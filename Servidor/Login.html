@@ -177,5 +177,36 @@
         </div>
     </div>
     <script src="Sistema/Script.js"></script>
+
+    <script>
+        fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                usuario: document.getElementById("usuario").value,
+                senha: document.getElementById("senha").value
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Redirecionar para a página principal ou dashboard
+                window.location.href = "dashboard.html";
+            } else {
+                // Exibir mensagem de erro
+                const errorMessage = document.getElementById("errorMessage");
+                errorMessage.textContent = data.message || "Usuário ou senha incorretos.";
+                errorMessage.classList.add("show");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao fazer login:", error);
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = "Ocorreu um erro. Tente novamente mais tarde.";
+            errorMessage.classList.add("show");
+        });
+    </script>
 </body>
 </html>
