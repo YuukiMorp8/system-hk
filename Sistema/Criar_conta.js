@@ -1,6 +1,8 @@
-let nomeinput = document.getElementById("nome");
-let emailinput = document.getElementById("email");
-let senhainput = document.getElementById("senha");
+// Criar_conta.js
+
+let nomeinput = document.getElementById("novoUsuario");
+let emailinput = document.getElementById("novoEmail");
+let senhainput = document.getElementById("novaSenha");
 let criarconta = document.getElementById("btnCriarConta");
 
 criarconta.addEventListener("click", function() {
