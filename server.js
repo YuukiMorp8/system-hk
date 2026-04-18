@@ -1,3 +1,5 @@
+// server.js
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -6,6 +8,10 @@ const app = express();
 
 const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
+
+const db = client.db("BancOAfW");
+const usersCollection = db.collection("	Dbgenerico");
+
 
 function connectToDatabase() {
     const url = process.env.DB_URL;
@@ -20,6 +26,7 @@ connectToDatabase()
     .catch(error => {
         console.error("Erro ao conectar ao MongoDB:", error);
     });
+
 
 app.get("/", (req, res) => {
  res.sendFile(__dirname + "/Servidor/Login.html");
