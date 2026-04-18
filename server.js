@@ -16,7 +16,7 @@ connectToDatabase().then(client => {
     console.log("Conectado ao MongoDB");
     const db = client.db("BancOAfW");
     const usersCollection = db.collection("users");
-    app.post("/login", express.json(), async (req, res) => {
+    app.post("Sistema/Login.html", express.json(), async (req, res) => {
         const { username, password } = req.body;
         const user = await usersCollection.findOne({ username,
             password });
