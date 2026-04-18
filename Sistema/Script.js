@@ -14,3 +14,4 @@ let criarconta = document.getElementById("btnCriarConta");
 criarconta.addEventListener("click", function() {
     window.location.href = "Login.html";
 }); 
+console.log("Script carregado");
