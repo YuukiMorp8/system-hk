@@ -13,6 +13,7 @@ const MongoClient = mongodb.MongoClient;
 
 app.use(express.json());
 app.use(express.static("Sistema"));
+app.use(express.static("Servidor"));
 
 function connectToDatabase() {
     const url = process.env.DB_URL;
@@ -49,7 +50,7 @@ app.post("/criar-conta", (req, res) => {
 });
 
 app.get("/", (req, res) => {
- res.sendFile(__dirname + "/Sistema/Login.html");
+ res.sendFile(__dirname + "Servidor/Login.html");
 });
 
 app.listen(3000, () => {
