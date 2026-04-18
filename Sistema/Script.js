@@ -10,23 +10,24 @@ loginButton.addEventListener("click", function() {
 
 fetch("/login", {
     method: "POST",
-    headers: {
+    headers: { 
         "Content-Type": "application/json"
     },
     body: JSON.stringify({ usuario: usuario, senha: senha })
 })
-
 .then(response => response.json())
-.then(data => {
-    data.success ? window.location.href = "/Dashboard.html" : document.getElementById("errorMessage").textContent = data.message;
+.then(data => { 
     console.log("Resposta do servidor:", data);
+
+    if (data.success) {
+        window.location.href = "/Dashboard.html";
+    } else {
+        let errorMessage = document.getElementById("errorMessage");
+        errorMessage.textContent = data.message;
+        errorMessage.classList.add("show"); // 👈 isso faltava
+    }
 })
 .catch(error => {
-    data.success = false;
-    data.message = "Erro ao fazer login";
-    document.getElementById("errorMessage").textContent = data.message;
-
     console.error("Erro ao fazer login:", error);
-
 });
 });
