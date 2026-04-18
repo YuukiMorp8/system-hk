@@ -177,6 +177,22 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script>
+        document.getElementById("btnLogin").addEventListener("click", function() {
+            const usuario = document.getElementById("usuario").value;
+            const senha = document.getElementById("senha").value;
+            const errorMessage = document.getElementById("errorMessage");
 
+            // Simulação de validação de login
+            if (usuario === "nome" && senha === "senha") {
+                alert("Login bem-sucedido!");
+                errorMessage.classList.remove("show");
+                errorMessage.textContent = "";
+            } else {
+                errorMessage.textContent = "Usuário ou senha incorretos.";
+                errorMessage.classList.add("show");
+            }
+        });
+    </script>
 </body>
 </html>
