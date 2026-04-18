@@ -26,6 +26,21 @@ connectToDatabase()
         console.error("Erro ao conectar ao MongoDB:", error);
     });
 
+fetch("/Login", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ usuario: usuario, senha: senha })
+})
+.then(response => response.json())
+.then(data => {
+    console.log("Resposta do servidor:", data);
+})
+.catch(error => {
+    console.error("Erro ao fazer login:", error);
+});
+
 app.post("/criar-conta", (req, res) => {
     const { nome, email, senha } = req.body;
     console.log("Dados recebidos:", { nome, email, senha });
