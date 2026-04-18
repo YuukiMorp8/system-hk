@@ -9,3 +9,8 @@ loginbutton.addEventListener("click", function() {
     console.log("Usuário:", usuario);
     console.log("Senha:", senha);
 });
+
+let criarconta = document.getElementById("btnCriarConta");
+criarconta.addEventListener("click", function() {
+    window.location.href = "Login.html";
+}); 
