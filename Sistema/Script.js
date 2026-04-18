@@ -12,6 +12,6 @@ loginbutton.addEventListener("click", function() {
 
 let criarconta = document.getElementById("btnCriarConta");
 criarconta.addEventListener("click", function() {
-    window.location.href = "Sistema/Login.html";
+    window.location.href = "Servidor/Login.html";
 }); 
 console.log("Script carregado");
