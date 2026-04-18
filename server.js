@@ -9,7 +9,7 @@ const MongoClient = mongodb.MongoClient;
 
 function connectToDatabase() {
     const url = process.env.DB_URL;
-    return MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+    return MongoClient.connect(url);
 }
 connectToDatabase()
     .then(client => {
