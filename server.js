@@ -29,17 +29,45 @@ connectToDatabase()
         console.error("Erro ao conectar ao MongoDB:", error);
     });
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     const { usuario, senha } = req.body;
-    console.log("Dados de login recebidos:", { usuario, senha });
-    if (!db) {
-        return res.status(500).json({ error: "Banco de dados não conectado" });
-    }
-    // Lógica para verificar as credenciais no banco de dados
-    res.json({ success: true, message: "Login bem-sucedido" });
-}
-);
 
+    if (!db) {
+        return res.status(500).json({
+            success: false,
+            message: "Banco não conectado"
+        });
+    }
+
+    try {
+        const user = await db.collection("Dbgenerico").findOne({ usuario: usuario });
+
+        if (!user) {
+            return res.json({
+                success: false,
+                message: "Usuário não encontrado"
+            });
+        }
+
+        if (user.senha !== senha) {
+            return res.json({
+                success: false,
+                message: "Senha incorreta"
+            });
+        }
+
+        return res.json({
+            success: true
+        });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: "Erro no servidor"
+        });
+    }
+});
 app.post("/criar-conta", (req, res) => {
     const { nome, email, senha } = req.body;
     console.log("Dados recebidos:", { nome, email, senha });
@@ -47,6 +75,10 @@ app.post("/criar-conta", (req, res) => {
         return res.status(500).json({ error: "Banco de dados não conectado" });
     }
     // Lógica para criar a conta no banco de dados
+});
+
+app.get("/", (req, res) => {
+    res.sendFile("/Dashboard.html");
 });
 
 app.get("/", (req, res) => {
