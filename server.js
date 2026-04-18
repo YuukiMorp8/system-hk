@@ -32,15 +32,7 @@ app.post("/criar-conta", (req, res) => {
     if (!db) {
         return res.status(500).json({ error: "Banco de dados não conectado" });
     }
-    db.collection("Dbgenerico").insertOne({ nome, email, senha })
-        .then(result => {
-            console.log("Conta criada com sucesso:", result);
-            res.json({ message: "Conta criada com sucesso" });
-        })
-        .catch(error => {
-            console.error("Erro ao criar conta:", error);
-            res.status(500).json({ error: "Erro ao criar conta" });
-        });
+    // Lógica para criar a conta no banco de dados
 });
 
 app.get("/", (req, res) => {
@@ -50,5 +42,4 @@ app.get("/", (req, res) => {
 app.listen(3000, () => {
  console.log("Servidor rodando");
 });
-
 
