@@ -29,45 +29,33 @@ connectToDatabase()
         console.error("Erro ao conectar ao MongoDB:", error);
     });
 
-app.post("/login", async (req, res) => {
+app.post("/login", (req, res) => {
     const { usuario, senha } = req.body;
-
+    console.log("Dados de login recebidos:", { usuario, senha });
     if (!db) {
-        return res.status(500).json({
-            success: false,
-            message: "Banco não conectado"
-        });
+        return res.status(500).json({ success: false, message: "Banco de dados não conectado" });
     }
-
-    try {
-        const user = await db.collection("Dbgenerico").findOne({ usuario: usuario });
-
+try {
+    db.collection("Dbgenerico").findOne({ usuario: usuario }, (err, user) => {
+        if (err) {
+            console.error("Erro ao consultar o banco de dados:", err);
+            return res.status(500).json({ success: false, message: "Erro ao consultar o banco de dados" });
+        }
         if (!user) {
-            return res.json({
-                success: false,
-                message: "Usuário não encontrado"
-            });
-        }
-
-        if (user.senha !== senha) {
-            return res.json({
-                success: false,
-                message: "Senha incorreta"
-            });
-        }
-
-        return res.json({
-            success: true
-        });
-
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-            success: false,
-            message: "Erro no servidor"
-        });
-    }
+            return res.json({ success: false, message: "Usuário não encontrado" });
+        }  
+        if (user.senha === senha) {
+            return res.json({ success: true, message: "Login bem-sucedido" });
+        } else {
+            return res.json({ success: false, message: "Senha incorreta" });
+        } 
+    });
+} catch (error) {
+    console.error("Erro ao processar o login:", error);
+    return res.status(500).json({ success: false, message: "Erro ao processar o login" });
+}
 });
+    
 app.post("/criar-conta", (req, res) => {
     const { nome, email, senha } = req.body;
     console.log("Dados recebidos:", { nome, email, senha });
@@ -88,4 +76,3 @@ app.get("/", (req, res) => {
 app.listen(3000, () => {
  console.log("Servidor rodando");
 });
-
