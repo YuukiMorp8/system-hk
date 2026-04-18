@@ -27,7 +27,7 @@ connectToDatabase()
     });
 
 
-    app.post("Servidor/Login", (req, res) => {
+    app.post("/login", (req, res) => {
         const { usuario, senha } = req.body;
         console.log("Dados de login recebidos:", { usuario, senha });
         if (!db) {
@@ -36,21 +36,6 @@ connectToDatabase()
         // Lógica para verificar as credenciais no banco de dados
     }
 );
-
-fetch("Servidor/Login", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ usuario: "exemplo", senha: "senha123" })
-})
-.then(response => response.json())
-.then(data => {
-    console.log("Resposta do servidor:", data);
-})
-.catch(error => {
-    console.error("Erro ao fazer login:", error);
-});
 
 app.post("/criar-conta", (req, res) => {
     const { nome, email, senha } = req.body;
