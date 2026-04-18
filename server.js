@@ -26,12 +26,23 @@ connectToDatabase()
         console.error("Erro ao conectar ao MongoDB:", error);
     });
 
-fetch("/Login", {
+
+    app.post("/login", (req, res) => {
+        const { usuario, senha } = req.body;
+        console.log("Dados de login recebidos:", { usuario, senha });
+        if (!db) {
+            return res.status(500).json({ error: "Banco de dados não conectado" });
+        }
+        // Lógica para verificar as credenciais no banco de dados
+    }
+);
+
+fetch("/login", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
     },
-    body: JSON.stringify({ usuario: usuario, senha: senha })
+    body: JSON.stringify({ usuario: "exemplo", senha: "senha123" })
 })
 .then(response => response.json())
 .then(data => {
