@@ -7,29 +7,22 @@ const app = express();
 const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
 
-async function connectToDatabase() {
-    const client = new MongoClient(process.env.DB_URL);
-    await client.connect();
-    return client;
+let db;
+db = client.db("BancOAfW");
+
+function connectToDatabase() {
+    const url = process.env.DB_URL;
+    return MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 }
-connectToDatabase().then(client => {
-    console.log("Conectado ao MongoDB");
-    const db = client.db("BancOAfW");
-    const usersCollection = db.collection("users");
-    app.post("Sistema/Login.html", express.json(), async (req, res) => {
-        const { username, password } = req.body;
-        const user = await usersCollection.findOne({ username,
-            password });
-        if (user) {
-            res.json({ success: true, message: "Login bem-sucedido" });
-        }
-        else {
-            res.json({ success: false, message: "Credenciais inválidas" });
-        }
+connectToDatabase()
+    .then(client => {
+        console.log("Conectado ao MongoDB");
+        const db = client.db("dbname");
+        // Você pode usar a variável `db` para interagir com o banco de dados
+    })
+    .catch(error => {
+        console.error("Erro ao conectar ao MongoDB:", error);
     });
-}).catch(err => {
-    console.error("Erro ao conectar ao MongoDB:", err);
-});
 
 app.get("/", (req, res) => {
  res.sendFile(__dirname + "/Sistema/Login.html");
@@ -38,4 +31,3 @@ app.get("/", (req, res) => {
 app.listen(3000, () => {
  console.log("Servidor rodando");
 });
-
