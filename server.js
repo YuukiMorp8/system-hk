@@ -22,7 +22,7 @@ connectToDatabase()
     });
 
 app.get("/", (req, res) => {
- res.sendFile(__dirname + "/Sistema/Login.html");
+ res.sendFile(__dirname + "/Servidor/Login.html");
 });
 
 app.listen(3000, () => {
