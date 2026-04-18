@@ -27,7 +27,7 @@ connectToDatabase()
     });
 
 
-    app.post("/login", (req, res) => {
+    app.post("Servidor/Login", (req, res) => {
         const { usuario, senha } = req.body;
         console.log("Dados de login recebidos:", { usuario, senha });
         if (!db) {
@@ -37,7 +37,7 @@ connectToDatabase()
     }
 );
 
-fetch("/login", {
+fetch("Servidor/Login", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
