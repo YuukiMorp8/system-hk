@@ -9,9 +9,8 @@ const password = process.env.MONGO_PASSWORD;
 console.log("USER:", user);
 console.log("PASS:", password);
 
-// rota básica
 app.get("/", (req, res) => {
-    res.send("Servidor online 🚀");
+    res.sendFile(__dirname + "/Login.html");
 });
 
 // importante: usar porta do Render
