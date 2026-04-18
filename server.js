@@ -11,6 +11,8 @@ const app = express();
 const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
 
+app.use(express.json());
+app.use(express.static("Sistema"));
 
 function connectToDatabase() {
     const url = process.env.DB_URL;
@@ -47,10 +49,11 @@ app.post("/criar-conta", (req, res) => {
 });
 
 app.get("/", (req, res) => {
- res.sendFile(__dirname + "/Servidor/Login.html");
+ res.sendFile(__dirname + "/Sistema/Login.html");
 });
 
 app.listen(3000, () => {
  console.log("Servidor rodando");
 });
+
 
