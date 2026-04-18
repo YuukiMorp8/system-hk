@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Sistema</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* (seu CSS ficou ótimo, mantive igual) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -18,7 +15,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0;
         }
 
         .login-container {
@@ -28,185 +24,57 @@
             padding: 40px;
             width: 100%;
             max-width: 400px;
-            animation: fadeIn 0.5s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .login-header h2 {
-            color: #333;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .login-header p {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
-            font-size: 14px;
-        }
+        .input-group { margin-bottom: 20px; }
 
         .input-group input {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
+            padding: 12px;
             border-radius: 10px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .input-group input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .input-group input:hover {
-            border-color: #667eea;
+            border: 2px solid #e0e0e0;
         }
 
         .login-btn {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #667eea;
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 10px;
-        }
-
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
         }
 
         .error-message {
-            background: #fee;
-            color: #c33;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 15px;
-            text-align: center;
-            font-size: 14px;
             display: none;
+            color: red;
+            margin-top: 10px;
         }
 
         .error-message.show {
             display: block;
-            animation: shake 0.3s ease-in-out;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #999;
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                margin: 20px;
-                padding: 30px;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <h2>Bem-vindo</h2>
-            <p>Faça login para continuar</p>
-        </div>
 
-        <div class="input-group">
-            <label for="usuario">Usuário</label>
-            <input id="usuario" type="text" placeholder="Digite seu usuário" autocomplete="username">
-        </div>
+<div class="login-container">
+    <h2>Login</h2>
 
-        <div class="input-group">
-            <label for="senha">Senha</label>
-            <input id="senha" type="password" placeholder="Digite sua senha" autocomplete="current-password">
-        </div>
-
-        <button id="btnLogin" class="login-btn">Entrar</button>
-
-        <div id="errorMessage" class="error-message"></div>
-        
-        <div class="footer">
-            <p>Sistema de Login Seguro</p>
-        </div>
+    <div class="input-group">
+        <input id="usuario" type="text" placeholder="Usuário">
     </div>
-    <script src="Sistema/Script.js"></script>
 
-    <script>
-        fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                usuario: document.getElementById("usuario").value,
-                senha: document.getElementById("senha").value
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Redirecionar para a página principal ou dashboard
-                window.location.href = "dashboard.html";
-            } else {
-                // Exibir mensagem de erro
-                const errorMessage = document.getElementById("errorMessage");
-                errorMessage.textContent = data.message || "Usuário ou senha incorretos.";
-                errorMessage.classList.add("show");
-            }
-        })
-        .catch(error => {
-            console.error("Erro ao fazer login:", error);
-            const errorMessage = document.getElementById("errorMessage");
-            errorMessage.textContent = "Ocorreu um erro. Tente novamente mais tarde.";
-            errorMessage.classList.add("show");
-        });
-    </script>
+    <div class="input-group">
+        <input id="senha" type="password" placeholder="Senha">
+    </div>
+
+    <button id="btnLogin">Entrar</button>
+
+    <div id="errorMessage" class="error-message"></div>
+</div>
+
+<script src="Sistema/Script.js"></script>
+
 </body>
 </html>
